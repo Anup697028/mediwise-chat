@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -15,7 +14,17 @@ import {
   File, 
   Paperclip,
   Image,
-  Plus
+  Plus,
+  ArrowDownToLine,
+  Phone,
+  Video,
+  MoreVertical,
+  PaperclipIcon,
+  SendHorizontal,
+  Smile,
+  ImageIcon,
+  Mic,
+  User2
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -55,7 +64,6 @@ const MessagesPage = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  // Mock data - replace with actual API calls
   const [chats, setChats] = useState<Chat[]>([
     {
       id: "1",
@@ -214,17 +222,14 @@ const MessagesPage = () => {
     ],
   });
 
-  // Scroll to bottom of messages when messages change or new message is sent
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [selectedChat, allMessages]);
 
-  // Mark messages as read when chat is selected
   useEffect(() => {
     if (selectedChat) {
-      // Mark all unread messages as read in the selected chat
       setChats((prevChats) =>
         prevChats.map((chat) =>
           chat.id === selectedChat ? { ...chat, unread: 0 } : chat
@@ -244,13 +249,11 @@ const MessagesPage = () => {
       status: "sending",
     };
 
-    // Add message to the chat
     setAllMessages((prev) => ({
       ...prev,
       [selectedChat]: [...(prev[selectedChat] || []), newMessage],
     }));
 
-    // Update last message in chat list
     setChats((prevChats) =>
       prevChats.map((chat) =>
         chat.id === selectedChat
@@ -265,7 +268,6 @@ const MessagesPage = () => {
 
     setMessageInput("");
 
-    // Simulate message status updates
     setTimeout(() => {
       setAllMessages((prev) => ({
         ...prev,
@@ -274,7 +276,6 @@ const MessagesPage = () => {
         ),
       }));
       
-      // After 1 second, update to delivered
       setTimeout(() => {
         setAllMessages((prev) => ({
           ...prev,
@@ -283,7 +284,6 @@ const MessagesPage = () => {
           ),
         }));
         
-        // After 2 more seconds, update to read
         setTimeout(() => {
           setAllMessages((prev) => ({
             ...prev,
@@ -300,7 +300,6 @@ const MessagesPage = () => {
     chat.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Sort chats by last message timestamp (most recent first)
   const sortedChats = [...filteredChats].sort(
     (a, b) => b.lastMessageTime.getTime() - a.lastMessageTime.getTime()
   );
@@ -314,20 +313,16 @@ const MessagesPage = () => {
       messageDate.getMonth() === today.getMonth() &&
       messageDate.getFullYear() === today.getFullYear()
     ) {
-      // Today: show only time
       return messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     } else if (
       today.getTime() - messageDate.getTime() < 7 * 24 * 60 * 60 * 1000
     ) {
-      // Within a week: show day name
       return messageDate.toLocaleDateString([], { weekday: 'short' });
     } else {
-      // Older: show date
       return messageDate.toLocaleDateString([], { day: 'numeric', month: 'short' });
     }
   };
 
-  // Function to render message status indicator
   const renderMessageStatus = (status?: string) => {
     switch (status) {
       case "sending":
@@ -346,7 +341,6 @@ const MessagesPage = () => {
   return (
     <div className="container mx-auto py-6">
       <div className="grid grid-cols-12 gap-6 h-[calc(100vh-10rem)]">
-        {/* Chat List */}
         <Card className="col-span-4 h-full flex flex-col">
           <CardHeader className="pb-2">
             <CardTitle>Messages</CardTitle>
@@ -409,7 +403,6 @@ const MessagesPage = () => {
           </CardContent>
         </Card>
 
-        {/* Chat Window */}
         <Card className="col-span-8 h-full flex flex-col">
           {selectedChat ? (
             <>
@@ -495,7 +488,7 @@ const MessagesPage = () => {
                                         toast.success(`Downloading ${attachment.name}`);
                                       }}
                                     >
-                                      <Download className="h-3.5 w-3.5" />
+                                      <ArrowDownToLine className="h-4 w-4" />
                                     </Button>
                                   </div>
                                 ))}
@@ -528,7 +521,7 @@ const MessagesPage = () => {
                     size="icon" 
                     onClick={() => toast.info("Attachment feature coming soon")}
                   >
-                    <Paperclip className="h-4 w-4" />
+                    <PaperclipIcon className="h-4 w-4" />
                   </Button>
                   <Input
                     placeholder="Type your message..."
@@ -541,7 +534,7 @@ const MessagesPage = () => {
                     onClick={handleSendMessage}
                     disabled={!messageInput.trim()}
                   >
-                    <Send className="h-4 w-4" />
+                    <SendHorizontal className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -571,4 +564,3 @@ const MessagesPage = () => {
 };
 
 export default MessagesPage;
-
