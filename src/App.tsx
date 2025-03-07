@@ -23,6 +23,7 @@ import MedicalShopsPage from "./pages/MedicalShopsPage";
 import OrderTrackingPage from "./pages/OrderTrackingPage";
 import SettingsPage from "./pages/SettingsPage";
 import PaymentsPage from "./pages/PaymentsPage";
+import SymptomTrackerPage from "./pages/SymptomTrackerPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/payments" element={<PaymentsPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/symptom-tracker" element={<SymptomTrackerPage />} />
           </Route>
           
           {/* Catch-all route */}
