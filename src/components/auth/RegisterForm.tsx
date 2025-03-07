@@ -45,7 +45,7 @@ const RegisterForm = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      await api.register(values.name, values.email, values.password);
+      await api.register(values.name, values.email, values.password, null);
       toast({
         title: "Registration successful",
         description: "Your account has been created successfully.",
