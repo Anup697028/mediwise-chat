@@ -49,6 +49,32 @@ You can deploy this project using any hosting platform that supports Node.js app
 
 Follow the platform-specific deployment instructions for a React application.
 
+## Firebase Integration
+
+MediConnect uses Firebase as its database and backend solution. To set up Firebase for this project, follow these steps:
+
+1. Go to the [Firebase Console](https://console.firebase.google.com/).
+2. Click on "Add project" and follow the prompts to create a new Firebase project.
+3. Once your project is created, navigate to the "Project settings".
+4. Under the "General" tab, you will find your Firebase configuration settings. Copy these settings as you will need them in your application.
+5. Install Firebase in your project:
+   ```sh
+   npm install firebase
+   ```
+6. Initialize Firebase in your application by adding the following code to your main application file:
+
+   ```javascript
+   import { initializeApp } from "firebase/app";
+
+   const firebaseConfig = {
+     // Your Firebase configuration settings here
+   };
+
+   const app = initializeApp(firebaseConfig);
+   ```
+
+This integration allows you to utilize Firebase's real-time database, authentication, and other backend services effectively.
+
 ## Repository Links
 
 - [MediConnect GitHub Repository](https://github.com/Anup697028/MediConnect.git)
